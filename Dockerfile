@@ -1,7 +1,10 @@
 FROM php:8.0-alpine
 
 # Install PHP modules and clean up
-RUN apk add --no-cache $PHPIZE_DEPS imagemagick-dev; \
+RUN apk add --no-cache $PHPIZE_DEPS \
+    imagemagick-dev icu-dev zlib-dev libpng-dev libzip-dev; \
+    # Additional dependencies
+    docker-php-ext-install intl pcntl gd exif zip; \
     # ==============
     # Xdebug
     # ==============
@@ -31,7 +34,7 @@ RUN apk add --no-cache $PHPIZE_DEPS imagemagick-dev; \
     rm -rf /tmp/pear;
 
 # Install other dependencies
-RUN apk add --no-cache git curl sqlite nodejs npm ncdu; \
+RUN apk add --no-cache git curl sqlite nodejs npm ncdu openssh-client; \
     # Note: For yarn 2.0 we should use "yarn set version berry"
     # see: https://yarnpkg.com/getting-started/install
     npm install --global yarn;
