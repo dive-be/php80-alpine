@@ -4,7 +4,7 @@ FROM php:8.0-alpine
 RUN apk add --no-cache $PHPIZE_DEPS \
     imagemagick-dev icu-dev zlib-dev libpng-dev libzip-dev; \
     # Additional dependencies
-    docker-php-ext-install intl pcntl gd exif zip; \
+    docker-php-ext-install intl pcntl gd exif zip mysqli pdo pdo_mysql; \
     # ==============
     # Xdebug
     # ==============
